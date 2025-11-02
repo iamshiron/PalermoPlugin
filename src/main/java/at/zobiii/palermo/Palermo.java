@@ -5,6 +5,7 @@ import at.zobiii.palermo.chat.ChatFormatListener;
 import at.zobiii.palermo.listeners.ActivityListener;
 import at.zobiii.palermo.listeners.JoinQuitListener;
 import at.zobiii.palermo.listeners.PlayerJoinListener;
+import at.zobiii.palermo.listeners.CropReplenishListener;
 import at.zobiii.palermo.prefix.PrefixCommand;
 import at.zobiii.palermo.prefix.PrefixManager;
 import at.zobiii.palermo.scoreboard.ScoreboardService;
@@ -48,6 +49,7 @@ public final class Palermo extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new ActivityListener(afkManager), this);
         getServer().getPluginManager().registerEvents(new ChatFormatListener(prefixManager, afkManager), this);
         getServer().getPluginManager().registerEvents(new PlayerJoinListener(this), this);
+        getServer().getPluginManager().registerEvents(new CropReplenishListener(), this);
 
         startSchedulers();
 
@@ -58,7 +60,16 @@ public final class Palermo extends JavaPlugin {
             tabListService.setHeaderFooter(player);
         }
 
-        getLogger().info("Palermo enabled!");
+        getLogger().info(" ");
+        getLogger().info("\u001B[33m ██████   █████  ██      ███████ ██████  ███    ███  ██████  ");
+        getLogger().info("\u001B[33m ██   ██ ██   ██ ██      ██      ██   ██ ████  ████ ██    ██ ");
+        getLogger().info("\u001B[33m ██████  ███████ ██      █████   ██████  ██ ████ ██ ██    ██ ");
+        getLogger().info("\u001B[33m ██      ██   ██ ██      ██      ██   ██ ██  ██  ██ ██    ██ ");
+        getLogger().info("\u001B[33m ██      ██   ██ ███████ ███████ ██   ██ ██      ██  ██████  ");
+        getLogger().info("\u001B[33m                                                             ");
+        getLogger().info("\u001B[32m              Plugin successfully enabled!                   ");
+        getLogger().info("\u001B[37m              Version: " + getDescription().getVersion());
+        getLogger().info("\u001B[0m ");
     }
 
     @Override
@@ -78,7 +89,15 @@ public final class Palermo extends JavaPlugin {
 
         prefixManager.save();
 
-        getLogger().info("Palermo disabled!");
+        getLogger().info(" ");
+        getLogger().info("\u001B[33m ██████   █████  ██      ███████ ██████  ███    ███  ██████  ");
+        getLogger().info("\u001B[33m ██   ██ ██   ██ ██      ██      ██   ██ ████  ████ ██    ██ ");
+        getLogger().info("\u001B[33m ██████  ███████ ██      █████   ██████  ██ ████ ██ ██    ██ ");
+        getLogger().info("\u001B[33m ██      ██   ██ ██      ██      ██   ██ ██  ██  ██ ██    ██ ");
+        getLogger().info("\u001B[33m ██      ██   ██ ███████ ███████ ██   ██ ██      ██  ██████  ");
+        getLogger().info("\u001B[33m                                                             ");
+        getLogger().info("\u001B[31m              Plugin disabled. Goodbye!                      ");
+        getLogger().info("\u001B[0m ");
     }
 
     private void startSchedulers() {
