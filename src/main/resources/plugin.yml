@@ -1,0 +1,15 @@
+name: Palermo
+version: '${version}'
+main: at.zobiii.palermo.Palermo
+api-version: '1.13'
+
+commands:
+  pre:
+    description: Set your custom prefix
+    usage: /pre <text> <color>
+    permission: palermo.prefix
+
+permissions:
+  palermo.prefix:
+    description: Allows setting a custom prefix
+    default: true
