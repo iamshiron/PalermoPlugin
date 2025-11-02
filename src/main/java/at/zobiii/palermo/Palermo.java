@@ -26,14 +26,15 @@ public final class Palermo extends JavaPlugin {
     private BukkitTask afkCheckTask;
     private BukkitTask scoreboardUpdateTask;
     private BukkitTask scoreboardRotateTask;
+    private BukkitTask tabListUpdateTask;
 
     @Override
     public void onEnable() {
         prefixManager = new PrefixManager(this);
         afkManager = new AfkManager();
-        tabListService = new TabListService(prefixManager, afkManager);
-        scoreboardService = new ScoreboardService();
         tpsTracker = new TpsTracker();
+        tabListService = new TabListService(prefixManager, afkManager, tpsTracker);
+        scoreboardService = new ScoreboardService();
 
         afkManager.setAfkChangeCallback(this::onAfkChange);
         tpsTracker.start(this);
@@ -71,6 +72,9 @@ public final class Palermo extends JavaPlugin {
         if (scoreboardRotateTask != null) {
             scoreboardRotateTask.cancel();
         }
+        if (tabListUpdateTask != null) {
+            tabListUpdateTask.cancel();
+        }
 
         prefixManager.save();
 
@@ -94,6 +98,10 @@ public final class Palermo extends JavaPlugin {
         scoreboardRotateTask = Bukkit.getScheduler().runTaskTimer(this, () -> {
             scoreboardService.nextPage();
         }, 400L, 400L);
+
+        tabListUpdateTask = Bukkit.getScheduler().runTaskTimer(this, () -> {
+            tabListService.updateAllHeadersFooters();
+        }, 3L, 3L);
     }
 
     private void onAfkChange(Player player) {
