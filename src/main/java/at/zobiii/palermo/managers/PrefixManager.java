@@ -1,4 +1,4 @@
-package at.zobiii.palermo.prefix;
+package at.zobiii.palermo.managers;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;

@@ -1,4 +1,4 @@
-package at.zobiii.palermo.scoreboard;
+package at.zobiii.palermo.services;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

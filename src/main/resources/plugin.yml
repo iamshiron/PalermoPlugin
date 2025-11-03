@@ -11,8 +11,22 @@ commands:
     description: Set your custom prefix
     usage: /pre <text> <color>
     permission: palermo.prefix
+  sit:
+    description: Sit down where you are
+    usage: /sit
+    permission: palermo.sit
+  trash:
+    description: Open a trash can to delete items
+    usage: /trash
+    permission: palermo.trash
 
 permissions:
   palermo.prefix:
     description: Allows setting a custom prefix
+    default: true
+  palermo.sit:
+    description: Allows sitting
+    default: true
+  palermo.trash:
+    description: Allows opening trash can
     default: true

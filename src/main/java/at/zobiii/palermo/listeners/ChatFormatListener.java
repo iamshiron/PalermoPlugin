@@ -1,7 +1,7 @@
-package at.zobiii.palermo.chat;
+package at.zobiii.palermo.listeners;
 
-import at.zobiii.palermo.afk.AfkManager;
-import at.zobiii.palermo.prefix.PrefixManager;
+import at.zobiii.palermo.managers.AfkManager;
+import at.zobiii.palermo.managers.PrefixManager;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

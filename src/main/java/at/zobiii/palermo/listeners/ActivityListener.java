@@ -1,6 +1,6 @@
 package at.zobiii.palermo.listeners;
 
-import at.zobiii.palermo.afk.AfkManager;
+import at.zobiii.palermo.managers.AfkManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

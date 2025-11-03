@@ -1,4 +1,4 @@
-package at.zobiii.palermo.afk;
+package at.zobiii.palermo.managers;
 
 import org.bukkit.entity.Player;
 

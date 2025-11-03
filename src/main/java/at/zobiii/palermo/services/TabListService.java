@@ -1,7 +1,7 @@
-package at.zobiii.palermo.tab;
+package at.zobiii.palermo.services;
 
-import at.zobiii.palermo.afk.AfkManager;
-import at.zobiii.palermo.prefix.PrefixManager;
+import at.zobiii.palermo.managers.AfkManager;
+import at.zobiii.palermo.managers.PrefixManager;
 import at.zobiii.palermo.util.TpsTracker;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

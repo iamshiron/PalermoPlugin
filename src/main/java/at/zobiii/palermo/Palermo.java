@@ -1,15 +1,19 @@
 package at.zobiii.palermo;
 
-import at.zobiii.palermo.afk.AfkManager;
-import at.zobiii.palermo.chat.ChatFormatListener;
+import at.zobiii.palermo.commands.PrefixCommand;
+import at.zobiii.palermo.commands.SitCommand;
+import at.zobiii.palermo.commands.TrashCommand;
 import at.zobiii.palermo.listeners.ActivityListener;
+import at.zobiii.palermo.listeners.ChatFormatListener;
+import at.zobiii.palermo.listeners.CropReplenishListener;
 import at.zobiii.palermo.listeners.JoinQuitListener;
 import at.zobiii.palermo.listeners.PlayerJoinListener;
-import at.zobiii.palermo.listeners.CropReplenishListener;
-import at.zobiii.palermo.prefix.PrefixCommand;
-import at.zobiii.palermo.prefix.PrefixManager;
-import at.zobiii.palermo.scoreboard.ScoreboardService;
-import at.zobiii.palermo.tab.TabListService;
+import at.zobiii.palermo.listeners.SitListener;
+import at.zobiii.palermo.listeners.TrashListener;
+import at.zobiii.palermo.managers.AfkManager;
+import at.zobiii.palermo.managers.PrefixManager;
+import at.zobiii.palermo.services.ScoreboardService;
+import at.zobiii.palermo.services.TabListService;
 import at.zobiii.palermo.util.TpsTracker;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -44,12 +48,16 @@ public final class Palermo extends JavaPlugin {
         prefixCommand.setOnPrefixChange(tabListService::updatePlayer);
         getCommand("pre").setExecutor(prefixCommand);
         getCommand("pre").setTabCompleter(prefixCommand);
+        getCommand("sit").setExecutor(new SitCommand());
+        getCommand("trash").setExecutor(new TrashCommand());
 
         getServer().getPluginManager().registerEvents(new JoinQuitListener(), this);
         getServer().getPluginManager().registerEvents(new ActivityListener(afkManager), this);
         getServer().getPluginManager().registerEvents(new ChatFormatListener(prefixManager, afkManager), this);
         getServer().getPluginManager().registerEvents(new PlayerJoinListener(this), this);
         getServer().getPluginManager().registerEvents(new CropReplenishListener(), this);
+        getServer().getPluginManager().registerEvents(new SitListener(),this);
+        getServer().getPluginManager().registerEvents(new TrashListener(), this);
 
         startSchedulers();
 

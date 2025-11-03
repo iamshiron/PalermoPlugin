@@ -1,5 +1,6 @@
-package at.zobiii.palermo.prefix;
+package at.zobiii.palermo.commands;
 
+import at.zobiii.palermo.managers.PrefixManager;
 import at.zobiii.palermo.util.ColorUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
