@@ -6,6 +6,7 @@ import at.zobiii.palermo.commands.TrashCommand;
 import at.zobiii.palermo.listeners.ActivityListener;
 import at.zobiii.palermo.listeners.ChatFormatListener;
 import at.zobiii.palermo.listeners.CropReplenishListener;
+import at.zobiii.palermo.listeners.DeathListener;
 import at.zobiii.palermo.listeners.JoinQuitListener;
 import at.zobiii.palermo.listeners.PlayerJoinListener;
 import at.zobiii.palermo.listeners.SitListener;
@@ -13,6 +14,7 @@ import at.zobiii.palermo.listeners.TrashListener;
 import at.zobiii.palermo.managers.AfkManager;
 import at.zobiii.palermo.managers.PrefixManager;
 import at.zobiii.palermo.services.ScoreboardService;
+import at.zobiii.palermo.services.StatsService;
 import at.zobiii.palermo.services.TabListService;
 import at.zobiii.palermo.util.TpsTracker;
 import org.bukkit.Bukkit;
@@ -26,6 +28,7 @@ public final class Palermo extends JavaPlugin {
     private AfkManager afkManager;
     private TabListService tabListService;
     private ScoreboardService scoreboardService;
+    private StatsService statsService;
     private TpsTracker tpsTracker;
 
     private BukkitTask afkCheckTask;
@@ -38,8 +41,9 @@ public final class Palermo extends JavaPlugin {
         prefixManager = new PrefixManager(this);
         afkManager = new AfkManager();
         tpsTracker = new TpsTracker();
-        tabListService = new TabListService(prefixManager, afkManager, tpsTracker);
-        scoreboardService = new ScoreboardService();
+        statsService = new StatsService();
+        tabListService = new TabListService(prefixManager, afkManager, tpsTracker, statsService);
+        scoreboardService = new ScoreboardService(statsService);
 
         afkManager.setAfkChangeCallback(this::onAfkChange);
         tpsTracker.start(this);
@@ -58,6 +62,7 @@ public final class Palermo extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new CropReplenishListener(), this);
         getServer().getPluginManager().registerEvents(new SitListener(),this);
         getServer().getPluginManager().registerEvents(new TrashListener(), this);
+        getServer().getPluginManager().registerEvents(new DeathListener(this), this);
 
         startSchedulers();
 

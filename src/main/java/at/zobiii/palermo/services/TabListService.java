@@ -14,13 +14,15 @@ public class TabListService {
     private final PrefixManager prefixManager;
     private final AfkManager afkManager;
     private final TpsTracker tpsTracker;
+    private final StatsService statsService;
 
     private int animationFrame = 0;
 
-    public TabListService(PrefixManager prefixManager, AfkManager afkManager, TpsTracker tpsTracker) {
+    public TabListService(PrefixManager prefixManager, AfkManager afkManager, TpsTracker tpsTracker, StatsService statsService) {
         this.prefixManager = prefixManager;
         this.afkManager = afkManager;
         this.tpsTracker = tpsTracker;
+        this.statsService = statsService;
     }
 
     public void updatePlayer(Player player) {
@@ -94,12 +96,14 @@ public class TabListService {
     private String buildDisplayName(Player player) {
         String prefix = buildPrefix(player);
         String playerName = ChatColor.GRAY + player.getName();
+        int deaths = statsService.getDeaths(player);
+        String deathCounter = ChatColor.DARK_GRAY + " [" + deaths + "]";
 
         if (prefix.isEmpty()) {
-            return playerName;
+            return playerName + deathCounter;
         }
 
-        return prefix + " " + playerName;
+        return prefix + " " + playerName + deathCounter;
     }
 
     private String buildPrefix(Player player) {

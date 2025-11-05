@@ -27,6 +27,7 @@ public class PrefixManager {
         this.dataFile = new File(plugin.getDataFolder(), "prefixes.json");
         this.gson = new GsonBuilder().setPrettyPrinting().create();
         this.prefixes = new ConcurrentHashMap<>();
+        load();
     }
 
     private void load() {
