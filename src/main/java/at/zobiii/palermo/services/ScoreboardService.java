@@ -61,7 +61,7 @@ public class ScoreboardService {
         int onlinePlayers = Bukkit.getOnlinePlayers().size();
         int maxPlayers = Bukkit.getMaxPlayers();
         String playtime = statsService.getPlaytime(player);
-        
+
         objective.getScore("   ").setScore(6);
         objective.getScore("§8Playtime: §7" + playtime).setScore(5);
         objective.getScore(" ").setScore(4);
@@ -76,7 +76,7 @@ public class ScoreboardService {
         String tpsFormatted = String.format("%.1f", Math.min(tps, 20.0));
         String tpsColor = tps >= 19.0 ? "§a" : tps >= 15.0 ? "§e" : "§c";
         String playtime = statsService.getPlaytime(player);
-        
+
         objective.getScore("   ").setScore(6);
         objective.getScore("§8Playtime: §7" + playtime).setScore(5);
         objective.getScore(" ").setScore(4);
@@ -90,7 +90,7 @@ public class ScoreboardService {
         int ping = player.getPing();
         String pingColor = ping < 50 ? "§a" : ping < 100 ? "§e" : "§c";
         String playtime = statsService.getPlaytime(player);
-        
+
         objective.getScore("   ").setScore(6);
         objective.getScore("§8Playtime: §7" + playtime).setScore(5);
         objective.getScore(" ").setScore(4);
@@ -105,7 +105,7 @@ public class ScoreboardService {
         String currentTime = timeFormat.format(now);
         String currentDate = dateFormat.format(now);
         String playtime = statsService.getPlaytime(player);
-        
+
         objective.getScore("    ").setScore(7);
         objective.getScore("§8Playtime: §7" + playtime).setScore(6);
         objective.getScore(" ").setScore(5);
@@ -126,14 +126,14 @@ public class ScoreboardService {
             int distance = statsService.getDistanceWalked(player);
             int jumps = statsService.getJumps(player);
             String timeSinceDeath = statsService.getTimeSinceDeath(player);
-        
-        objective.getScore("      ").setScore(12);
-        objective.getScore("§8Playtime: §7" + playtime).setScore(11);
-        objective.getScore("    ").setScore(10);
-        objective.getScore("§7Deaths: §f" + deaths).setScore(9);
-        objective.getScore("§7PvP Kills: §f" + playerKills).setScore(8);
-        objective.getScore("§7Mob Kills: §f" + mobKills).setScore(7);
-        objective.getScore("   ").setScore(6);
+
+            objective.getScore("      ").setScore(12);
+            objective.getScore("§8Playtime: §7" + playtime).setScore(11);
+            objective.getScore("    ").setScore(10);
+            objective.getScore("§7Deaths: §f" + deaths).setScore(9);
+            objective.getScore("§7PvP Kills: §f" + playerKills).setScore(8);
+            objective.getScore("§7Mob Kills: §f" + mobKills).setScore(7);
+            objective.getScore("   ").setScore(6);
             objective.getScore("§7Blocks: §f" + blocksBroken).setScore(5);
             objective.getScore("§7Distance: §f" + distance + "m").setScore(4);
             objective.getScore("§7Jumps: §f" + jumps).setScore(3);
