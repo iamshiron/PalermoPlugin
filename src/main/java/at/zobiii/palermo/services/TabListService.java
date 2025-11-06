@@ -136,7 +136,7 @@ public class TabListService {
     private String buildDisplayName(Player player) {
         String prefix = buildPrefix(player);
         String playerName = ChatColor.GRAY + player.getName();
-        String deaths = statsService.getDeaths(player) + " Tode";
+        String deaths = statsService.getDeaths(player) + " Deaths";
         String deathCounter = ChatColor.DARK_GRAY + "   [" + ChatColor.GRAY +  deaths + ChatColor.DARK_GRAY + "]";
 
         if (prefix.isEmpty()) {

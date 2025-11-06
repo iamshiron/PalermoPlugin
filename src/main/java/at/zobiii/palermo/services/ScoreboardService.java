@@ -149,8 +149,10 @@ public class ScoreboardService {
 
     private void clearScores(Scoreboard scoreboard) {
         Objective objective = scoreboard.getObjective("palermo");
-        if (objective != null) {
-            for (String entry : scoreboard.getEntries()) {
+        if (objective == null) return;
+        
+        for (String entry : scoreboard.getEntries()) {
+            if (objective.getScore(entry).isScoreSet()) {
                 scoreboard.resetScores(entry);
             }
         }

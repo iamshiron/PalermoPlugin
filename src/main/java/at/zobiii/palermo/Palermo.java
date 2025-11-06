@@ -3,6 +3,7 @@ package at.zobiii.palermo;
 import at.zobiii.palermo.commands.PrefixCommand;
 import at.zobiii.palermo.commands.SitCommand;
 import at.zobiii.palermo.commands.TrashCommand;
+import at.zobiii.palermo.listeners.AboveNameListener;
 import at.zobiii.palermo.listeners.ActivityListener;
 import at.zobiii.palermo.listeners.ChatFormatListener;
 import at.zobiii.palermo.listeners.CropReplenishListener;
@@ -13,6 +14,7 @@ import at.zobiii.palermo.listeners.SitListener;
 import at.zobiii.palermo.listeners.TrashListener;
 import at.zobiii.palermo.managers.AfkManager;
 import at.zobiii.palermo.managers.PrefixManager;
+import at.zobiii.palermo.services.AboveNameService;
 import at.zobiii.palermo.services.ScoreboardService;
 import at.zobiii.palermo.services.StatsService;
 import at.zobiii.palermo.services.TabListService;
@@ -28,6 +30,7 @@ public final class Palermo extends JavaPlugin {
     private AfkManager afkManager;
     private TabListService tabListService;
     private ScoreboardService scoreboardService;
+    private AboveNameService aboveNameService;
     private StatsService statsService;
     private TpsTracker tpsTracker;
 
@@ -44,18 +47,22 @@ public final class Palermo extends JavaPlugin {
         statsService = new StatsService();
         tabListService = new TabListService(prefixManager, afkManager, tpsTracker, statsService);
         scoreboardService = new ScoreboardService(statsService);
+        aboveNameService = new AboveNameService(prefixManager, afkManager);
 
         afkManager.setAfkChangeCallback(this::onAfkChange);
         tpsTracker.start(this);
 
         PrefixCommand prefixCommand = new PrefixCommand(prefixManager);
-        prefixCommand.setOnPrefixChange(tabListService::updatePlayer);
+        prefixCommand.setOnPrefixChange(player -> {
+            tabListService.updatePlayer(player);
+            aboveNameService.updateTeam(player);
+        });
         getCommand("pre").setExecutor(prefixCommand);
         getCommand("pre").setTabCompleter(prefixCommand);
         getCommand("sit").setExecutor(new SitCommand());
         getCommand("trash").setExecutor(new TrashCommand());
 
-        getServer().getPluginManager().registerEvents(new JoinQuitListener(), this);
+        getServer().getPluginManager().registerEvents(new JoinQuitListener(this), this);
         getServer().getPluginManager().registerEvents(new ActivityListener(afkManager), this);
         getServer().getPluginManager().registerEvents(new ChatFormatListener(prefixManager, afkManager), this);
         getServer().getPluginManager().registerEvents(new PlayerJoinListener(this), this);
@@ -63,6 +70,7 @@ public final class Palermo extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new SitListener(),this);
         getServer().getPluginManager().registerEvents(new TrashListener(), this);
         getServer().getPluginManager().registerEvents(new DeathListener(this), this);
+        getServer().getPluginManager().registerEvents(new AboveNameListener(this), this);
 
         startSchedulers();
 
@@ -71,6 +79,7 @@ public final class Palermo extends JavaPlugin {
             scoreboardService.createScoreboard(player);
             tabListService.updatePlayer(player);
             tabListService.setHeaderFooter(player);
+            aboveNameService.setupPlayer(player);
         }
 
         getLogger().info(" ");
@@ -138,6 +147,7 @@ public final class Palermo extends JavaPlugin {
 
     private void onAfkChange(Player player) {
         tabListService.updatePlayer(player);
+        aboveNameService.updateTeam(player);
     }
 
     public ScoreboardService getScoreboardService() {
@@ -150,5 +160,9 @@ public final class Palermo extends JavaPlugin {
 
     public AfkManager getAfkManager() {
         return afkManager;
+    }
+
+    public AboveNameService getAboveNameService() {
+        return aboveNameService;
     }
 }

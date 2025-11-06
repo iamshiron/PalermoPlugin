@@ -24,6 +24,7 @@ public class PlayerJoinListener implements Listener {
         plugin.getScoreboardService().createScoreboard(player);
         plugin.getTabListService().updatePlayer(player);
         plugin.getTabListService().setHeaderFooter(player);
+        plugin.getAboveNameService().setupPlayer(player);
         
         showWelcomeTitle(player);
         playWelcomeSound(player);
@@ -37,6 +38,6 @@ public class PlayerJoinListener implements Listener {
     }
     
     private void playWelcomeSound(Player player) {
-        player.playSound(player.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, 1.0f, 1.0f);
+        player.playSound(player.getLocation(), Sound.ITEM_GOAT_HORN_SOUND_0, 0.5f, 1.2f);
     }
 }
