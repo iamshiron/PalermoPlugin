@@ -38,6 +38,6 @@ public class PlayerJoinListener implements Listener {
     }
     
     private void playWelcomeSound(Player player) {
-        player.playSound(player.getLocation(), Sound.ITEM_GOAT_HORN_SOUND_0, 0.5f, 1.2f);
+        player.playSound(player.getLocation(), Sound.ITEM_GOAT_HORN_SOUND_5, 0.5f, 1.8f);
     }
 }

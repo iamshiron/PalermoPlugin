@@ -12,7 +12,7 @@ import java.util.Date;
 
 public class ScoreboardService {
 
-    private static final int TOTAL_PAGES = 5;
+    private static final int TOTAL_PAGES = 2;
     private int currentPage = 0;
     private final SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
@@ -45,11 +45,8 @@ public class ScoreboardService {
         clearScores(scoreboard);
 
         switch (currentPage) {
-            case 0 -> updatePlayersPage(objective, player);
-            case 1 -> updateTpsPage(objective, player);
-            case 2 -> updatePingPage(objective, player);
-            case 3 -> updateTimePage(objective, player);
-            case 4 -> updateStatsPage(objective, player);
+            case 0 -> updateWeatherPage(objective, player);
+            case 1 -> updateWorldStatsPage(objective, player);
         }
     }
 
@@ -145,6 +142,67 @@ public class ScoreboardService {
             objective.getScore("§7» Personal Stats").setScore(0);
             e.printStackTrace();
         }
+    }
+
+    private void updateWeatherPage(Objective objective, Player player) {
+        String playtime = statsService.getPlaytime(player);
+        org.bukkit.World world = player.getWorld();
+
+        boolean hasStorm = world.hasStorm();
+        boolean thundering = world.isThundering();
+        int weatherDuration = world.getWeatherDuration();
+        int weatherMinutes = weatherDuration / 1200;
+
+        long time = world.getTime();
+        String timeOfDay = getTimeOfDay(time);
+
+        String weatherStatus = thundering ? "§c⚡ Thunder" : hasStorm ? "§9☂ Rain" : "§e☀ Clear";
+
+        objective.getScore("         ").setScore(10);
+        objective.getScore("§8Playtime: §7" + playtime).setScore(9);
+        objective.getScore("        ").setScore(8);
+        objective.getScore("§7Weather").setScore(7);
+        objective.getScore("  " + weatherStatus).setScore(6);
+        objective.getScore("§7Duration").setScore(5);
+        objective.getScore("  §b" + weatherMinutes + "m").setScore(4);
+        objective.getScore("       ").setScore(3);
+        objective.getScore("§7Time: §f" + timeOfDay).setScore(2);
+        objective.getScore("      ").setScore(1);
+        objective.getScore("§7» Weather Forecast").setScore(0);
+
+    }
+
+    private void updateWorldStatsPage(Objective objective, Player player) {
+        String playtime = statsService.getPlaytime(player);
+        org.bukkit.World world = player.getWorld();
+        
+        int entities = world.getEntities().size();
+        int chunks = world.getLoadedChunks().length;
+        String difficulty = world.getDifficulty().name();
+        String biome = player.getLocation().getBlock().getBiome().name();
+        biome = biome.replace("_", " ").toLowerCase();
+        biome = Character.toUpperCase(biome.charAt(0)) + biome.substring(1);
+        
+        objective.getScore("       ").setScore(11);
+        objective.getScore("§8Playtime: §7" + playtime).setScore(10);
+        objective.getScore("     ").setScore(9);
+        objective.getScore("§7Biome: §f" + biome).setScore(8);
+        objective.getScore("    ").setScore(7);
+        objective.getScore("§7Entities: §f" + entities).setScore(6);
+        objective.getScore("§7Chunks: §f" + chunks).setScore(5);
+        objective.getScore("   ").setScore(4);
+        objective.getScore("§7Difficulty").setScore(3);
+        objective.getScore("  §6" + difficulty).setScore(2);
+        objective.getScore("  ").setScore(1);
+        objective.getScore("§7» World Stats").setScore(0);
+    }
+
+    private String getTimeOfDay(long time) {
+        time = time % 24000;
+        if (time < 6000) return "Morning";
+        if (time < 12000) return "Day";
+        if (time < 18000) return "Evening";
+        return "Night";
     }
 
     private void clearScores(Scoreboard scoreboard) {
