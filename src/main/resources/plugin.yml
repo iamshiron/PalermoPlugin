@@ -19,6 +19,10 @@ commands:
     description: Open a trash can to delete items
     usage: /trash
     permission: palermo.trash
+  worldhook:
+    description: Manage WorldHook settings
+    usage: /worldhook <reload|toggle>
+    permission: palermo.worldhook
 
 permissions:
   palermo.prefix:
@@ -29,4 +33,9 @@ permissions:
     default: true
   palermo.trash:
     description: Allows opening trash can
+    default: true
+
+  # WorldHook permissions
+  palermo.worldhook:
+    description: Allows managing WorldHook settings
     default: true

@@ -3,6 +3,7 @@ package at.zobiii.palermo;
 import at.zobiii.palermo.commands.PrefixCommand;
 import at.zobiii.palermo.commands.SitCommand;
 import at.zobiii.palermo.commands.TrashCommand;
+import at.zobiii.palermo.commands.WorldhookCommand;
 import at.zobiii.palermo.listeners.AboveNameListener;
 import at.zobiii.palermo.listeners.ActivityListener;
 import at.zobiii.palermo.listeners.ChatFormatListener;
@@ -61,13 +62,14 @@ public final class Palermo extends JavaPlugin {
         getCommand("pre").setTabCompleter(prefixCommand);
         getCommand("sit").setExecutor(new SitCommand());
         getCommand("trash").setExecutor(new TrashCommand());
+        getCommand("worldhook").setExecutor(new WorldhookCommand());
 
         getServer().getPluginManager().registerEvents(new JoinQuitListener(this), this);
         getServer().getPluginManager().registerEvents(new ActivityListener(afkManager), this);
         getServer().getPluginManager().registerEvents(new ChatFormatListener(prefixManager, afkManager), this);
         getServer().getPluginManager().registerEvents(new PlayerJoinListener(this), this);
         getServer().getPluginManager().registerEvents(new CropReplenishListener(), this);
-        getServer().getPluginManager().registerEvents(new SitListener(),this);
+        getServer().getPluginManager().registerEvents(new SitListener(), this);
         getServer().getPluginManager().registerEvents(new TrashListener(), this);
         getServer().getPluginManager().registerEvents(new DeathListener(this), this);
         getServer().getPluginManager().registerEvents(new AboveNameListener(this), this);
