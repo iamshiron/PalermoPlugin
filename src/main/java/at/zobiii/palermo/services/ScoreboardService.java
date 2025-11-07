@@ -12,7 +12,7 @@ import java.util.Date;
 
 public class ScoreboardService {
 
-    private static final int TOTAL_PAGES = 2;
+    private static final int TOTAL_PAGES = 7;
     private int currentPage = 0;
     private final SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
@@ -45,8 +45,13 @@ public class ScoreboardService {
         clearScores(scoreboard);
 
         switch (currentPage) {
-            case 0 -> updateWeatherPage(objective, player);
-            case 1 -> updateWorldStatsPage(objective, player);
+            case 0 -> updatePlayersPage(objective, player);
+            case 1 -> updateTpsPage(objective, player);
+            case 2 -> updatePingPage(objective, player);
+            case 3 -> updateTimePage(objective, player);
+            case 4 -> updateStatsPage(objective, player);
+            case 5 -> updateWeatherPage(objective, player);
+            case 6 -> updateWorldStatsPage(objective, player);
         }
     }
 

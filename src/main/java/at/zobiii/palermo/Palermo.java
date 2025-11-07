@@ -138,7 +138,7 @@ public final class Palermo extends JavaPlugin {
 
         scoreboardRotateTask = Bukkit.getScheduler().runTaskTimer(this, () -> {
             scoreboardService.nextPage();
-        }, 400L, 400L);
+        }, 200L, 200L);
 
         tabListUpdateTask = Bukkit.getScheduler().runTaskTimer(this, () -> {
             tabListService.updateAllHeadersFooters();
