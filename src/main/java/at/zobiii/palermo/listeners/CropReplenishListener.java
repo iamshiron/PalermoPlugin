@@ -64,12 +64,17 @@ public class CropReplenishListener implements Listener {
         event.setCancelled(true);
 
         Material cropType = block.getType();
+        ItemStack item = event.getItem();
 
         block.breakNaturally(player.getInventory().getItemInMainHand());
 
         block.setType(cropType);
         Ageable ageable = (Ageable)  block.getBlockData();
         block.setBlockData(ageable);
+        
+        if (item != null && item.getAmount() > 0) {
+            item.setAmount(item.getAmount() - 1);
+        }
         
         block.getWorld().spawnParticle(Particle.HAPPY_VILLAGER, block.getLocation().add(0.5, 0.5, 0.5), 5, 0.3, 0.3, 0.3, 0);
         player.playSound(block.getLocation(), Sound.BLOCK_CROP_BREAK, 0.5f, 1.3f);
