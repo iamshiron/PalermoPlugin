@@ -1,6 +1,7 @@
 package at.zobiii.palermo.listeners;
 
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.Ageable;
@@ -70,6 +71,7 @@ public class CropReplenishListener implements Listener {
         Ageable ageable = (Ageable)  block.getBlockData();
         block.setBlockData(ageable);
         
+        block.getWorld().spawnParticle(Particle.HAPPY_VILLAGER, block.getLocation().add(0.5, 0.5, 0.5), 5, 0.3, 0.3, 0.3, 0);
         player.playSound(block.getLocation(), Sound.BLOCK_CROP_BREAK, 0.5f, 1.3f);
     }
 }

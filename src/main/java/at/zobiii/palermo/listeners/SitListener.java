@@ -1,5 +1,6 @@
 package at.zobiii.palermo.listeners;
 
+import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
@@ -20,6 +21,7 @@ public class SitListener implements Listener {
             if(!stand.isVisible() && stand.isMarker()){
                 if(event.getEntity() instanceof Player) {
                     Player player = (Player) event.getEntity();
+                    player.getWorld().spawnParticle(Particle.CLOUD, player.getLocation().add(0, 0.2, 0), 5, 0.2, 0.1, 0.2, 0.01);
                     player.playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_FLAP, 0.2f, 1.8f);
                 }
                 stand.remove();

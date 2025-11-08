@@ -2,6 +2,8 @@ package at.zobiii.palermo.listeners;
 
 import at.zobiii.palermo.Palermo;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -32,6 +34,7 @@ public class JoinQuitListener implements Listener {
         
         showWelcomeTitle(player);
         playWelcomeSound(player);
+        spawnJoinParticles(player);
     }
     
     private void showWelcomeTitle(Player player) {
@@ -42,6 +45,16 @@ public class JoinQuitListener implements Listener {
     
     private void playWelcomeSound(Player player) {
         player.playSound(player.getLocation(), Sound.ITEM_GOAT_HORN_SOUND_5, 0.5f, 1.8f);
+    }
+    
+    private void spawnJoinParticles(Player player) {
+        Location loc = player.getLocation();
+        for (int i = 0; i < 12; i++) {
+            double angle = (Math.PI * 2 * i) / 12;
+            double x = Math.cos(angle) * 0.5;
+            double z = Math.sin(angle) * 0.5;
+            loc.getWorld().spawnParticle(Particle.END_ROD, loc.clone().add(x, 1, z), 1, 0, 0.3, 0, 0.02);
+        }
     }
 
     @EventHandler

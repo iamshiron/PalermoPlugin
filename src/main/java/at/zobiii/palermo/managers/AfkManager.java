@@ -1,5 +1,7 @@
 package at.zobiii.palermo.managers;
 
+import org.bukkit.Location;
+import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
@@ -55,8 +57,10 @@ public class AfkManager {
             
             if(afk) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_CHIME, 0.4f, 0.8f);
+                spawnAfkParticles(player);
             } else {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_CHIME, 0.4f, 1.5f);
+                spawnReturnParticles(player);
             }
             
             if(onAfkChange != null){
@@ -72,5 +76,15 @@ public class AfkManager {
     public void removeAfk(UUID uuid) {
         lastActivity.remove(uuid);
         afkStatus.remove(uuid);
+    }
+    
+    private void spawnAfkParticles(Player player) {
+        Location loc = player.getLocation().add(0, 2.2, 0);
+        player.getWorld().spawnParticle(Particle.SMOKE, loc, 8, 0.3, 0.1, 0.3, 0.02);
+    }
+    
+    private void spawnReturnParticles(Player player) {
+        Location loc = player.getLocation().add(0, 1.5, 0);
+        player.getWorld().spawnParticle(Particle.FIREWORK, loc, 12, 0.3, 0.3, 0.3, 0.05);
     }
 }
