@@ -6,9 +6,7 @@ import at.zobiii.palermo.util.TpsTracker;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.bukkit.profile.PlayerProfile;
 
-import javax.swing.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -136,7 +134,7 @@ public class TabListService {
     private String buildDisplayName(Player player) {
         String prefix = buildPrefix(player);
         String playerName = ChatColor.GRAY + player.getName();
-        String deaths = statsService.getDeaths(player) + " Deaths";
+        String deaths = statsService.getDeaths(player) + " Tode";
         String deathCounter = ChatColor.DARK_GRAY + "   [" + ChatColor.GRAY +  deaths + ChatColor.DARK_GRAY + "]";
 
         if (prefix.isEmpty()) {

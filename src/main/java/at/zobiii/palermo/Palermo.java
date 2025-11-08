@@ -9,7 +9,6 @@ import at.zobiii.palermo.listeners.ChatFormatListener;
 import at.zobiii.palermo.listeners.CropReplenishListener;
 import at.zobiii.palermo.listeners.DeathListener;
 import at.zobiii.palermo.listeners.JoinQuitListener;
-import at.zobiii.palermo.listeners.PlayerJoinListener;
 import at.zobiii.palermo.listeners.SitListener;
 import at.zobiii.palermo.listeners.TrashListener;
 import at.zobiii.palermo.managers.AfkManager;
@@ -65,9 +64,8 @@ public final class Palermo extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new JoinQuitListener(this), this);
         getServer().getPluginManager().registerEvents(new ActivityListener(afkManager), this);
         getServer().getPluginManager().registerEvents(new ChatFormatListener(prefixManager, afkManager), this);
-        getServer().getPluginManager().registerEvents(new PlayerJoinListener(this), this);
         getServer().getPluginManager().registerEvents(new CropReplenishListener(), this);
-        getServer().getPluginManager().registerEvents(new SitListener(),this);
+        getServer().getPluginManager().registerEvents(new SitListener(), this);
         getServer().getPluginManager().registerEvents(new TrashListener(), this);
         getServer().getPluginManager().registerEvents(new DeathListener(this), this);
         getServer().getPluginManager().registerEvents(new AboveNameListener(this), this);

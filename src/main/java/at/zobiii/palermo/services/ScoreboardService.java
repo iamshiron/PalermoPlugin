@@ -108,13 +108,14 @@ public class ScoreboardService {
         String currentDate = dateFormat.format(now);
         String playtime = statsService.getPlaytime(player);
 
-        objective.getScore("    ").setScore(7);
-        objective.getScore("§8Playtime: §7" + playtime).setScore(6);
-        objective.getScore(" ").setScore(5);
-        objective.getScore("§7Date").setScore(4);
-        objective.getScore("  §b" + currentDate).setScore(3);
-        objective.getScore("§7Time").setScore(2);
-        objective.getScore("  §b" + currentTime).setScore(1);
+        objective.getScore("     ").setScore(8);
+        objective.getScore("§8Playtime: §7" + playtime).setScore(7);
+        objective.getScore("    ").setScore(6);
+        objective.getScore("§7Date").setScore(5);
+        objective.getScore("  §b" + currentDate).setScore(4);
+        objective.getScore("§7Time").setScore(3);
+        objective.getScore("  §b" + currentTime).setScore(2);
+        objective.getScore("   ").setScore(1);
         objective.getScore("§7» Server Time").setScore(0);
     }
 
