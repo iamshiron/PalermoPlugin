@@ -1,6 +1,7 @@
 package at.zobiii.palermo.commands;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -19,8 +20,9 @@ public class TrashCommand implements CommandExecutor {
 
         Player player = (Player) sender;
 
-        Inventory trash = Bukkit.createInventory(null, 27, "§cTrash Can §7- Items will be deleted!");
+        Inventory trash = Bukkit.createInventory(null, 27, "§cTrash Can");
         player.openInventory(trash);
+        player.playSound(player.getLocation(), Sound.BLOCK_CHEST_OPEN, 0.7f, 0.8f);
 
         return true;
     }

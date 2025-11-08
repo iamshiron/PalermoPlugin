@@ -1,6 +1,7 @@
 package at.zobiii.palermo.commands;
 
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -32,6 +33,7 @@ public class SitCommand implements CommandExecutor {
         seat.setMarker(true);
         seat.addPassenger(player);
 
+        player.playSound(loc, Sound.ENTITY_ENDER_DRAGON_FLAP, 0.3f, 2.0f);
         player.sendMessage("§aYou are now sitting! Shift to stand up");
         return true;
     }

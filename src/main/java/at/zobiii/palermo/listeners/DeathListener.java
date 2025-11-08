@@ -1,6 +1,7 @@
 package at.zobiii.palermo.listeners;
 
 import at.zobiii.palermo.Palermo;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,6 +18,7 @@ public class DeathListener implements Listener {
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
         Player player = event.getEntity();
+        player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 0.5f, 0.7f);
         plugin.getTabListService().updatePlayer(player);
     }
 }

@@ -1,5 +1,6 @@
 package at.zobiii.palermo.managers;
 
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 import java.util.Map;
@@ -51,6 +52,13 @@ public class AfkManager {
 
         if(wasAfk != afk) {
             afkStatus.put(uuid, afk);
+            
+            if(afk) {
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_CHIME, 0.4f, 0.8f);
+            } else {
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_CHIME, 0.4f, 1.5f);
+            }
+            
             if(onAfkChange != null){
                 onAfkChange.accept(player);
             }

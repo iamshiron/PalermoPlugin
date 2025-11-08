@@ -3,6 +3,7 @@ package at.zobiii.palermo.commands;
 import at.zobiii.palermo.managers.PrefixManager;
 import at.zobiii.palermo.util.ColorUtil;
 import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -44,6 +45,7 @@ public class PrefixCommand implements CommandExecutor, TabCompleter{
         if (args[0].equalsIgnoreCase("clear")) {
             prefixManager.removePrefix(player.getUniqueId());
             player.sendMessage(ChatColor.GREEN + "Your prefix has been removed.");
+            player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0.6f, 1.5f);
             notifyChange(player);
             return true;
         }
@@ -77,6 +79,7 @@ public class PrefixCommand implements CommandExecutor, TabCompleter{
         ChatColor color = ColorUtil.parseColor(colorInput);
         String preview = color + "[" + text + "]";
         player.sendMessage(ChatColor.GREEN + "Prefix set to: " + preview);
+        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0.6f, 1.5f);
         notifyChange(player);
         return true;
     }

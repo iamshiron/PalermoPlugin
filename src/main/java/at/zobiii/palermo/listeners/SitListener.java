@@ -1,5 +1,6 @@
 package at.zobiii.palermo.listeners;
 
+import org.bukkit.Sound;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -17,6 +18,10 @@ public class SitListener implements Listener {
         if(vehicle instanceof ArmorStand) {
             ArmorStand stand = (ArmorStand) vehicle;
             if(!stand.isVisible() && stand.isMarker()){
+                if(event.getEntity() instanceof Player) {
+                    Player player = (Player) event.getEntity();
+                    player.playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_FLAP, 0.2f, 1.8f);
+                }
                 stand.remove();
             }
         }
