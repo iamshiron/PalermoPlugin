@@ -18,13 +18,15 @@ import at.zobiii.palermo.services.ScoreboardService;
 import at.zobiii.palermo.services.StatsService;
 import at.zobiii.palermo.services.TabListService;
 import at.zobiii.palermo.util.TpsTracker;
+import dev.jorel.commandapi.CommandAPI;
+import dev.jorel.commandapi.CommandAPISpigotConfig;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 
 public final class Palermo extends JavaPlugin {
-
     private PrefixManager prefixManager;
     private AfkManager afkManager;
     private TabListService tabListService;
@@ -40,6 +42,9 @@ public final class Palermo extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        CommandAPI.onLoad(new CommandAPISpigotConfig(this));
+        CommandAPI.onEnable();
+
         prefixManager = new PrefixManager(this);
         afkManager = new AfkManager();
         tpsTracker = new TpsTracker();
@@ -94,6 +99,8 @@ public final class Palermo extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        CommandAPI.onDisable();
+
         if (afkCheckTask != null) {
             afkCheckTask.cancel();
         }
